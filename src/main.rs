@@ -37,14 +37,17 @@ fn get_text_window(curr_pos: usize, rows: usize, buffer: &String) -> Option<(usi
             return Some((curr_pos + pos, &buffer[curr_pos..pos]));
         }
     }
+    if lines > 0 {
+        return Some((curr_pos + pos, &buffer[curr_pos..pos]));
+    }
     return None;
 }
 
 fn main() {
-    let filename = "data.txt";
+    let filename = "small.txt";
     let res = open_file(filename.to_string());
 
-    let new_lines = get_text_window(78888890, 5, &res);
+    let new_lines = get_text_window(0, 5, &res); //78888890
     match new_lines {
         Some((new_pos, myslice)) => println!("new_pos {} \nslice: \n{}", new_pos, myslice),
         None => println!("could get more windows"),
@@ -59,7 +62,7 @@ fn main() {
         }
         pos += 1;
 
-        if lines == 8000000{
+        if lines == 8000000 {
             println!("pos {}", pos);
         }
     }
